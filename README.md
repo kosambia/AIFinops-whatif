@@ -1,17 +1,30 @@
-# AI FinOps What-If Cost Analyzer 📊
+# AI FinOps & Observability Workspace 📊
 
-A beautiful, interactive "What-If" cost analysis dashboard designed for self-hosted **Langfuse** telemetry.
+A premium, interactive **AI FinOps and Observability Workspace** designed for self-hosted **Langfuse** telemetry.
 
-This project retrieves historical LLM telemetry logs from your self-hosted Langfuse databases (PostgreSQL and ClickHouse) and simulates cost scenarios. It helps teams analyze and project how much their LLM traces *would* have cost on other models (e.g., swapping **GPT-4o** or **Claude 3.5 Sonnet** to budget-friendly models like **Gemini 1.5 Flash** or **GPT-4o-mini**).
+This project retrieves historical LLM telemetry logs from your self-hosted Langfuse databases (PostgreSQL and ClickHouse) and simulates cost/resource optimizations. It helps engineering teams model, simulate, and govern their LLM expenditures.
 
 ---
 
-## Features ✨
-- 📈 **Cumulative Cost Projection**: Dynamic line charts plotting historical actual cumulative cost vs. simulated scenario costs over time.
-- ⚡ **Real-time Cost Deltas**: Computes net savings or cost increases (absolute USD and percentage difference) instantly upon model changes.
-- 🔄 **Quick Compare Panel**: Shows one-click comparative cost summaries for industry-standard models.
-- 🔍 **Detailed Search & Breakdown**: Interactive list of all generation events showing input/output tokens, timestamp, original model, and projected costs.
-- 🎨 **Premium Aesthetics**: Built with a sleek dark-mode glassmorphic interface, Outfit headings, and responsive layout.
+## Workspace Modules 🚀
+
+### 1. Model "What-If" Simulator
+- **Multi-Model Projections**: Instantly projects historical database costs on various target models (e.g. GPT-4o, Claude 3.5 Sonnet, Gemini Flash, GPT-4o-mini).
+- **Cumulative Cost Charts**: Plot chronological actual cumulative cost curves against simulated target model scenarios.
+- **Quick Comparison**: One-click summaries showing net difference projections for industry-standard models.
+
+### 2. Prompt Caching ROI Optimizer
+- **CHR Sliders**: Interactive controls to simulate Cache Hit Ratios (0-100%).
+- **Discount Modeling**: Customize caching discounts (e.g. 75% cheaper input tokens) to forecast exact financial gains from caching integrations.
+
+### 3. Intelligent Model Router
+- **Routing Rules**: Configure input token size thresholds to simulate routing logic (e.g., "route prompts under 150 tokens to *Gemini 1.5 Flash*, else route to *Gemini 1.5 Pro*").
+- **Cost Saving Projections**: Measures net savings and cost difference indexes automatically.
+
+### 4. Governance & Anomalous Cost Alerts
+- **Cost Limits**: Flag any trace sessions exceeding custom daily limit thresholds (USD).
+- **Token Limits**: Identify bloated inputs exceeding token bounds to prevent runaway agent loops.
+- **Visual Indicators**: Pulsing anomaly indicators and detailed data tables showing statuses.
 
 ---
 
