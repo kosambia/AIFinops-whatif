@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Langfuse What-If Cost Analyzer</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="glow-container">
+    <div class="glow-circle glow-violet"></div>
+    <div class="glow-circle glow-indigo"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand">
+        <i data-lucide="calculator" class="brand-icon"></i>
+        <div>
+          <h1>What-If Cost Analyzer</h1>
+          <p class="subtitle">Langfuse Telemetry Simulation Playground</p>
+        </div>
+      </div>
+      <div class="server-status">
+        <span class="status-indicator"></span>
+        <span>Local Database Connected</span>
+      </div>
+    </header>
+
+    <!-- Dashboard Grid -->
+    <main class="dashboard-grid">
+      <!-- Stats Cards -->
+      <section class="stats-section">
+        <!-- Card: Total Traces -->
+        <div class="stat-card">
+          <div class="card-header">
+            <span class="card-title">Total Generations</span>
+            <i data-lucide="cpu" class="card-icon"></i>
+          </div>
+          <div class="card-body">
+            <h2 id="total-generations">0</h2>
+            <p id="total-tokens">0 total tokens</p>
+          </div>
+        </div>
+
+        <!-- Card: Current Cost -->
+        <div class="stat-card">
+          <div class="card-header">
+            <span class="card-title">Actual Cost</span>
+            <i data-lucide="dollar-sign" class="card-icon text-indigo"></i>
+          </div>
+          <div class="card-body">
+            <h2 id="actual-cost" class="text-indigo">$0.00</h2>
+            <p id="actual-average">avg: $0.00 / trace</p>
+          </div>
+        </div>
+
+        <!-- Card: Target Scenario Cost -->
+        <div class="stat-card highlight-card">
+          <div class="card-header">
+            <span class="card-title">Simulated Scenario Cost</span>
+            <i data-lucide="sparkles" class="card-icon text-violet"></i>
+          </div>
+          <div class="card-body">
+            <h2 id="scenario-cost" class="text-violet">$0.00</h2>
+            <p id="scenario-average">avg: $0.00 / trace</p>
+          </div>
+        </div>
+
+        <!-- Card: Savings/Deficit -->
+        <div class="stat-card" id="delta-card">
+          <div class="card-header">
+            <span class="card-title" id="delta-label">Potential Cost Diff</span>
+            <i data-lucide="trending-up" class="card-icon" id="delta-icon"></i>
+          </div>
+          <div class="card-body">
+            <h2 id="delta-value">$0.00</h2>
+            <p id="delta-percentage">0% change</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Main Controls and Charts -->
+      <div class="content-row">
+        <!-- Left Panel: Controls -->
+        <section class="controls-card">
+          <h3>Simulation Parameters</h3>
+          <div class="control-group">
+            <label for="target-model-select">Target Scenario Model</label>
+            <div class="select-wrapper">
+              <select id="target-model-select" class="custom-select">
+                <!-- Loaded dynamically -->
+              </select>
+            </div>
+            <p class="control-help">Select the model to simulate cost parameters for all historical traces.</p>
+          </div>
+
+          <div class="model-info-box">
+            <div class="info-row">
+              <span>Model Input Price:</span>
+              <span id="model-input-price" class="price-val">$0.00 / 1M tokens</span>
+            </div>
+            <div class="info-row">
+              <span>Model Output Price:</span>
+              <span id="model-output-price" class="price-val">$0.00 / 1M tokens</span>
+            </div>
+          </div>
+
+          <div class="quick-compare">
+            <h4>Quick Compare Scenarios</h4>
+            <div id="quick-compare-list" class="compare-list">
+              <!-- Loaded dynamically -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Right Panel: Chart -->
+        <section class="chart-card">
+          <div class="chart-header">
+            <h3>Cumulative Cost Projection</h3>
+            <span class="chart-subtitle">Chronological progression of actual vs. simulated scenario costs</span>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="costChart"></canvas>
+          </div>
+        </section>
+      </div>
+
+      <!-- Historical Trace Details Table -->
+      <section class="table-card">
+        <div class="table-header">
+          <h3>Generation Breakdown</h3>
+          <input type="text" id="table-search" placeholder="Search traces/models..." class="search-input">
+        </div>
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>Trace ID</th>
+                <th>Original Model</th>
+                <th>Input Tokens</th>
+                <th>Output Tokens</th>
+                <th>Original Cost</th>
+                <th>Simulated Cost</th>
+              </tr>
+            </thead>
+            <tbody id="trace-table-body">
+              <!-- Loaded dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
